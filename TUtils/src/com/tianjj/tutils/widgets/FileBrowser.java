@@ -11,7 +11,6 @@ import java.util.List;
 
 import com.tianjj.tutils.R;
 import com.tianjj.tutils.base.AndroidUtils;
-import com.tianjj.tutils.base.SingleToast;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -121,7 +120,7 @@ public class FileBrowser extends ListView {
 					fileContent = "";
 				}
 			} catch (FileNotFoundException e) {
-				SingleToast.showToast(context, "权限不足");
+				AndroidUtils.showToast(context, "权限不足");
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

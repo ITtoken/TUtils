@@ -1,15 +1,20 @@
 package com.tianjj.tutils.base;
 
-
 import android.content.Context;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 public class AndroidUtils {
 	private static WindowManager wm;
 	private static int screenWidth;
 	private static int screenHeight;
 	private static long times[];
+
+	private static String oldMsg;
+	protected static Toast toast = null;
+	private static long oneTime = 0;
+	private static long twoTime = 0;
 
 	private static void init(Context context) {
 		wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
@@ -74,6 +79,40 @@ public class AndroidUtils {
 	public static int getScrennHeight(Context context) {
 		init(context);
 		return screenHeight;
+	}
+	
+	/**
+	 *  单例Toast
+	 * @param context
+	 * @param s 要显示的内容
+	 */
+	public static void showToast(Context context, String s) {
+		if (toast == null) {
+			toast = Toast.makeText(context, s, Toast.LENGTH_SHORT);
+			toast.show();
+			oneTime = System.currentTimeMillis();
+		} else {
+			twoTime = System.currentTimeMillis();
+			if (s.equals(oldMsg)) {
+				if (twoTime - oneTime > Toast.LENGTH_SHORT) {
+					toast.show();
+				}
+			} else {
+				oldMsg = s;
+				toast.setText(s);
+				toast.show();
+			}
+		}
+		oneTime = twoTime;
+	}
+
+	/**
+	 * 单例Toast
+	 * @param context
+	 * @param resId 字符串资源ID
+	 */
+	public static void showToast(Context context, int resId) {
+		showToast(context, context.getString(resId));
 	}
 
 }
