@@ -62,6 +62,28 @@ public interface DragStatListener {
 };
 ```
 
+**3. 布局使用**
+
+```xml
+	<com.tianjj.tutils.widgets.DragLayout
+	android:layout_width="match_parent"
+	android:layout_height="match_parent">
+	
+		<LinearLayout
+		android:id="@+id/ll_main"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		/>
+		
+		<LinearLayout
+		android:id="@+id/ll_menu"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		/>
+	
+	</com.tianjj.tutils.widgets.DragLayout>
+```
+
 ## 2. [FileBrowser](https://github.com/ITtoken/TUtils/blob/master/src/com/tianjj/tutils/widgets/FileBrowser.java)
 
 > 该控件可以当做文件浏览器使用
