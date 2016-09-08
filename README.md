@@ -7,26 +7,14 @@
   
 ## 1. 常用工具类使用
 
-<<<<<<< HEAD
-  1. [AndroidUtils](https://github.com/ITtoken/Tianjj/blob/master/TUtils/src/com/tianjj/tutils/base/AndroidUtils.java)
-=======
   1. [AndroidUtils](https://github.com/ITtoken/TUtils/blob/master/src/com/tianjj/tutils/base/AndroidUtils.java)
->>>>>>> 29f8b470fa6f8f622a7f2e2cae77cd8de6e30509
+      
       - 双击事件: `doubleClick(long gapTime)`
       - 多击事件: `MuitiClick(long gapTime, int clickTimes)`
       - 获取屏幕尺寸:
           - `getScrennWidth(Context context)`
           - `etScrennHeight(Context context)`
-<<<<<<< HEAD
-  2. [In2Out](https://github.com/ITtoken/Tianjj/blob/master/TUtils/src/com/tianjj/tutils/base/In2Out.java)
-      - 读取输入流中的内容并返回: `getInputstreamInfo(InputStream in) throws IOException`
-  3. [IntArrayUtils](https://github.com/ITtoken/Tianjj/blob/master/TUtils/src/com/tianjj/tutils/base/IntArrUtils.java)
-      - 读取数组中的最大/小值: `int getValueType(int[] intArr, int valueType)`
-      - 对目标数组进行排序: `int[] getSort(int[] intArr, int arrLen)`
-  4. [MD5](https://github.com/ITtoken/Tianjj/blob/master/TUtils/src/com/tianjj/tutils/base/MD5.java)
-      - `String encodingMD5(String password)`
-  5. [PinyinUtils](https://github.com/ITtoken/Tianjj/blob/master/TUtils/src/com/tianjj/tutils/base/PinyinUtil.java)
-=======
+
   2. [In2Out](https://github.com/ITtoken/TUtils/blob/master/src/com/tianjj/tutils/base/In2Out.java)
       - 读取输入流中的内容并返回: `getInputstreamInfo(InputStream in) throws IOException`
   3. [IntArrayUtils](https://github.com/ITtoken/TUtils/blob/master/src/com/tianjj/tutils/base/IntArrUtils.java)
@@ -35,28 +23,22 @@
   4. [MD5](https://github.com/ITtoken/TUtils/blob/master/src/com/tianjj/tutils/base/MD5.java)
       - `String encodingMD5(String password)`
   5. [PinyinUtils](https://github.com/ITtoken/TUtils/blob/master/src/com/tianjj/tutils/base/PinyinUtil.java)
->>>>>>> 29f8b470fa6f8f622a7f2e2cae77cd8de6e30509
   
       > _这里引用了belerweb大神的[pinyin4j](https://github.com/belerweb/pinyin4j)_
       
       - 获取汉字的拼音: `String getPinyin(String hanyuString, HanyuPinyinCaseType caseType)`
       - 获取拼音的首字母: `char getFirstChar(String hanyuString)`
       - 判断字符串是否是以汉字开头的: `boolean isStartWithHY(String hanyuString)`
-<<<<<<< HEAD
-  6. [SingleToast](https://github.com/ITtoken/Tianjj/blob/master/TUtils/src/com/tianjj/tutils/base/SingleToast.java)
-=======
+
   6. [SingleToast](https://github.com/ITtoken/TUtils/blob/master/src/com/tianjj/tutils/base/SingleToast.java)
->>>>>>> 29f8b470fa6f8f622a7f2e2cae77cd8de6e30509
+
       - 单例模式的Toast:
           - `showToast(Context context, String s)`
           - `showToast(Context context, int resId)`
 
 ## 2. Android Widgets模块的使用
-<<<<<<< HEAD
-## 1. [DragLayout](https://github.com/ITtoken/Tianjj/blob/master/TUtils/src/com/tianjj/tutils/widgets/DragLayout.java)
-=======
+
 ## 1. [DragLayout](https://github.com/ITtoken/TUtils/blob/master/src/com/tianjj/tutils/widgets/DragLayout.java)
->>>>>>> 29f8b470fa6f8f622a7f2e2cae77cd8de6e30509
 
 > 该控件基于Android的`ViewDragHelper`
 
@@ -85,9 +67,6 @@ public interface DragStatListener {
 };
 ```
 
-<<<<<<< HEAD
-## 2. [FileBrowser](https://github.com/ITtoken/Tianjj/blob/master/TUtils/src/com/tianjj/tutils/widgets/FileBrowser.java)
-=======
 **3. 布局使用**
 
 ```xml
@@ -111,7 +90,6 @@ public interface DragStatListener {
 ```
 
 ## 2. [FileBrowser](https://github.com/ITtoken/TUtils/blob/master/src/com/tianjj/tutils/widgets/FileBrowser.java)
->>>>>>> 29f8b470fa6f8f622a7f2e2cae77cd8de6e30509
 
 > 该控件可以当做文件浏览器使用
 
@@ -139,11 +117,7 @@ public interface DragStatListener {
 	}
 ```
 
-<<<<<<< HEAD
-## 3. [QuickIndexListView](https://github.com/ITtoken/Tianjj/blob/master/TUtils/src/com/tianjj/tutils/widgets/QuickIndexListview.java)
-=======
 ## 3. [QuickIndexListView](https://github.com/ITtoken/TUtils/blob/master/src/com/tianjj/tutils/widgets/QuickIndexListview.java)
->>>>>>> 29f8b470fa6f8f622a7f2e2cae77cd8de6e30509
 
 > 该控件将ListView和QuickIndexView进行了整合,可以直接像使用ListView一样简单的构造出`快速索引列表`,
 >> _该控件基于[QuickIndexView](https://github.com/ITtoken/Tianjj/blob/master/TUtils/src/com/tianjj/tutils/widgets/QuickIndexView.java) 和 [QuickIndexHelper](https://github.com/ITtoken/Tianjj/blob/master/TUtils/src/com/tianjj/tutils/helper/QuickIndexHelper.java)_
@@ -156,10 +130,8 @@ public interface DragStatListener {
 ```
 
 **2. 接口**
-<<<<<<< HEAD
-=======
+
 > QuickListAdapter
->>>>>>> 29f8b470fa6f8f622a7f2e2cae77cd8de6e30509
 
 ```java
 public abstract class QuickListAdapter {
