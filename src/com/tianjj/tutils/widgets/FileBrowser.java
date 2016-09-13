@@ -34,6 +34,7 @@ public class FileBrowser extends ListView {
 	private FileOrDirOperateListener mListener;
 	private String fileContent;
 	private String fileName;
+	private boolean isHiddenFileOrDir;
 
 	private void init(final Context context) {
 		currentPath = Environment.getExternalStorageDirectory().toString();
@@ -66,7 +67,12 @@ public class FileBrowser extends ListView {
 
 	private List<File> getFiles(String path) {
 		File file = new File(path);
-		List<File> list = Arrays.asList(file.listFiles());
+		File[] listFiles = file.listFiles();
+		if(listFiles == null && file.isDirectory()){
+			listFiles = new File[]{};
+		}
+		
+		List<File> list = Arrays.asList(listFiles);
 		return list;
 	}
 
@@ -83,26 +89,40 @@ public class FileBrowser extends ListView {
 	}
 
 	private LinearLayout generateLayout() {
-		LinearLayout linearLayout = new LinearLayout(context);
-		linearLayout.setOrientation(LinearLayout.HORIZONTAL);
+		LinearLayout ll_parent = new LinearLayout(context);
+		ll_parent.setOrientation(LinearLayout.HORIZONTAL);
 
-		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT,
+		LinearLayout.LayoutParams p_params = new LinearLayout.LayoutParams(
+				LayoutParams.WRAP_CONTENT,
 				LayoutParams.WRAP_CONTENT);
 
-		float padding = AndroidUtils.getScrennHeight(context) / 50.0f;
-		params.leftMargin = (int) padding;
-		params.topMargin = (int) padding;
-		params.rightMargin = (int) padding;
-		params.bottomMargin = (int) padding;
+		float p_padding = AndroidUtils.getScrennHeight(context) / 50.0f;
+		p_params.leftMargin = (int) p_padding;
+		p_params.topMargin = (int) p_padding;
+		p_params.rightMargin = (int) p_padding;
+		p_params.bottomMargin = (int) p_padding;
+		
+		LinearLayout ll_child = new LinearLayout(context);
+		ll_child.setOrientation(LinearLayout.VERTICAL);
+		
+		LinearLayout.LayoutParams c_params = new LinearLayout.LayoutParams(
+				LayoutParams.MATCH_PARENT,
+				LayoutParams.MATCH_PARENT);
 
 		ImageView iv = new ImageView(context);
 		TextView tv = new TextView(context);
+		TextView tv_tip = new TextView(context);
+		
 		iv.setId(0);
 		tv.setId(1);
-		linearLayout.addView(iv, params);
-		linearLayout.addView(tv, params);
+		tv_tip.setId(2);
+		
+		ll_child.addView(tv,c_params);
+		ll_child.addView(tv_tip,c_params);
+		ll_parent.addView(iv, p_params);
+		ll_parent.addView(ll_child, p_params);
 
-		return linearLayout;
+		return ll_parent;
 	}
 
 	private void goAhead(final Context context, int position) {
@@ -120,7 +140,7 @@ public class FileBrowser extends ListView {
 					fileContent = "";
 				}
 			} catch (FileNotFoundException e) {
-				AndroidUtils.showToast(context, "权限不足");
+				SingleToast.showToast(context, "权限不足");
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -151,9 +171,11 @@ public class FileBrowser extends ListView {
 
 			ImageView iv = (ImageView) ll.findViewById(0);
 			TextView tv = (TextView) ll.findViewById(1);
+			TextView tv_tip = (TextView) ll.findViewById(2);
 
 			tv.setTextSize(20);
 			tv.setPadding(5, 5, 5, 5);
+			tv_tip.setTextColor(Color.GRAY);
 
 			if (position == 0) {
 				tv.setText("...");
@@ -173,6 +195,14 @@ public class FileBrowser extends ListView {
 				} else {
 					tv.setTextColor(Color.GRAY);
 				}
+				
+				if(file.isDirectory() && file.isHidden()){
+					tv_tip.setVisibility(View.VISIBLE);
+					tv_tip.setTextSize(12);
+					tv_tip.setText("隐藏文件(夹)可能会受到系统权限影响而打开失败");
+				} else {
+					tv_tip.setVisibility(View.GONE);
+				}
 
 				String filepath = list.get(position - 1).toString();
 				tv.setText(filepath.substring(filepath.lastIndexOf("/") + 1));
@@ -184,7 +214,8 @@ public class FileBrowser extends ListView {
 			int drawableId = 0;
 			String fileFormat = file.getName().substring(file.getName().lastIndexOf(".") + 1);
 			if (file.getName().endsWith("." + fileFormat)) {
-				drawableId = context.getResources().getIdentifier(fileFormat, "drawable", context.getPackageName());
+				drawableId = context.getResources().getIdentifier(fileFormat, "drawable",
+				context.getPackageName());
 			} else {
 				drawableId = R.drawable.file;
 			}
