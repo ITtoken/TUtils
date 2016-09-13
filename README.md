@@ -162,4 +162,4 @@ public abstract class QuickListAdapter {
 
   _其他`Widgets`目前还正在更新验证..._
  
-  _此工具包会一直更新,各位有什么意见或建议可以一起商讨,Email: `<527623439@qq.com>`_
+  _此工具包会一直更新,各位有什么意见或建议可以一起商讨,Email: <527623439@qq.com>_
