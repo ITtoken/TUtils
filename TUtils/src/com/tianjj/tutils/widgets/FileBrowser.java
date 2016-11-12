@@ -6,6 +6,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -16,6 +17,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.os.Environment;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -27,6 +29,7 @@ import android.widget.TextView;
 
 public class FileBrowser extends ListView {
 
+	private static final String TAG = "FileBrowser";
 	private List<File> list;
 	private Context context;
 	private myAdapter myAdapter;
@@ -50,9 +53,11 @@ public class FileBrowser extends ListView {
 					return;
 				}
 
-				if (position == 0) {// 返回上一级
+				if (position == 0) {
+					// back to last level directory.
 					goToBack();
-				} else {// 进入目录或读取文件
+				} else {
+					// go into directory or read the file.
 					goAhead(context, position);
 				}
 
@@ -66,7 +71,15 @@ public class FileBrowser extends ListView {
 
 	private List<File> getFiles(String path) {
 		File file = new File(path);
-		List<File> list = Arrays.asList(file.listFiles());
+		File[] files = file.listFiles();
+		List<File> list = null;
+		if(files == null){
+			Log.e(TAG, "Please check if the permission 'android.permission.READ_EXTERNAL_STORAGE'"
+					+ "was used in manifest file!");
+			list = new ArrayList<File>();
+		}else{
+			list = Arrays.asList(files);
+		}
 		return list;
 	}
 
@@ -120,7 +133,7 @@ public class FileBrowser extends ListView {
 					fileContent = "";
 				}
 			} catch (FileNotFoundException e) {
-				AndroidUtils.showToast(context, "权限不足");
+				AndroidUtils.showToast(context, "Permission deny!");
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -208,7 +221,7 @@ public class FileBrowser extends ListView {
 	};
 
 	/**
-	 * 获取目录下所有文件的名字
+	 * Get the all files' name in specific path.
 	 * 
 	 * @param path
 	 * @return
@@ -220,7 +233,7 @@ public class FileBrowser extends ListView {
 	}
 
 	/**
-	 * 返回上一级
+	 * Back to last level.
 	 * 
 	 * @return
 	 */
@@ -238,11 +251,13 @@ public class FileBrowser extends ListView {
 
 	public interface FileOrDirOperateListener {
 		/**
-		 * 
+		 * @param fileName 
+		 * 			  The file's name you chose.
 		 * @param currentPath
-		 *            当前路径
+		 * 			  The path of directory where you are.
 		 * @param fileContent
-		 *            如果是文件,则返回文件内容,否是为空内容("")
+		 *            It will be null if the file content is null,
+		 *            or will be the content of the file.
 		 */
 		public void onChoose(String fileName, String currentPath, String fileContent);
 	}

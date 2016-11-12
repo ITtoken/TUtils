@@ -100,9 +100,14 @@ public interface DragStatListener {
 	2. String goToBack(): //返回上一级(return 要返回的目录路径)
 	3. void setFileOrDirOperateListener(FileOrDirOperateListener listener)//文件/文件夹操作监听
 ```
+**2. 需要权限**
+```xml
+<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+``` 
 
 **2. 接口**
 > FileOrDirOperateListener
+> >注意：该接口要在布局使用的界面中调用，否侧会抛`NullPointException`异常.
 
 ```java
 	public interface FileOrDirOperateListener {
