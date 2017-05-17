@@ -1,14 +1,6 @@
 package com.tianjj.tutils.base;
 
-import java.io.InputStream;
-import java.io.Reader;
-
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
-
-import android.util.Xml;
-
-public class JsonUtil {
+public class JsonUtil extends Base{
 	/**
 	 * 
 	 * @param json
@@ -39,13 +31,13 @@ public class JsonUtil {
 	 *            a collection of json's values
 	 * 
 	 * @throws RuntimeException
-	 *             "json 转换条件不成立"
+	 *             "json 杞崲鏉′欢涓嶆垚绔�"
 	 * @return a json string whitch has formated
 	 */
 	public static String arrays2Json(String[] keys, String[] values) throws RuntimeException {
 
 		if (keys == null || keys.length == 0 || values == null || values.length == 0 || keys.length != values.length) {
-			RuntimeException exception = new RuntimeException("json 转换条件不成立,请检查数组长度是否一样");
+			RuntimeException exception = new RuntimeException("json 杞崲鏉′欢涓嶆垚绔�,璇锋鏌ユ暟缁勯暱搴︽槸鍚︿竴鏍�");
 			exception.printStackTrace();
 			throw exception;
 		}

@@ -5,7 +5,7 @@ import android.util.DisplayMetrics;
 import android.view.WindowManager;
 import android.widget.Toast;
 
-public class AndroidUtils {
+public class AndroidUtils extends Base {
 	private static WindowManager wm;
 	private static int screenWidth;
 	private static int screenHeight;
@@ -25,11 +25,10 @@ public class AndroidUtils {
 	}
 
 	/**
-	 * 双击
 	 * 
 	 * @param gapTime
-	 *            点击间隔时间
-	 * @return 点击成功与否判断:true表示双击成功,false表示双击失败
+	 *            Time of between two click
+	 * @return Double click if <b>true</b>
 	 */
 	public static boolean doubleClick(long gapTime) {
 		times = new long[2];
@@ -43,7 +42,7 @@ public class AndroidUtils {
 	}
 
 	/**
-	 * 多次点击事件
+	 * 3 times or more click.
 	 * 
 	 * @param gapTime
 	 * @return
@@ -59,32 +58,22 @@ public class AndroidUtils {
 		return false;
 	}
 
-	/**
-	 * 获取屏幕尺寸
-	 *
-	 * @param context
-	 * @return 屏幕尺寸信息
-	 */
 	public static int getScrennWidth(Context context) {
 		init(context);
 		return screenWidth;
 	}
 
-	/**
-	 * 获取屏幕高度
-	 *
-	 * @param context
-	 * @return 屏幕尺寸信息
-	 */
 	public static int getScrennHeight(Context context) {
 		init(context);
 		return screenHeight;
 	}
-	
+
 	/**
-	 *  单例Toast
+	 * Single Toast
+	 * 
 	 * @param context
-	 * @param s 要显示的内容
+	 * @param s By string.
+	 *           
 	 */
 	public static void showToast(Context context, String s) {
 		if (toast == null) {
@@ -107,9 +96,11 @@ public class AndroidUtils {
 	}
 
 	/**
-	 * 单例Toast
+	 * Show Sinle Toast.
+	 * 
 	 * @param context
-	 * @param resId 字符串资源ID
+	 * @param resId
+	 *           By resource id.
 	 */
 	public static void showToast(Context context, int resId) {
 		showToast(context, context.getString(resId));

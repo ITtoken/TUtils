@@ -6,7 +6,7 @@ import net.sourceforge.pinyin4j.format.HanyuPinyinOutputFormat;
 import net.sourceforge.pinyin4j.format.HanyuPinyinToneType;
 import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombination;
 
-public class PinyinUtil {
+public class PinyinUtil extends Base{
 
 	private static PinyinUtil pu = new PinyinUtil();
 	private boolean isStartWithHY;

@@ -1,27 +1,23 @@
 package com.tianjj.tutils.base;
 
 /**
- * 整形数组工具类
+ * 鏁村舰鏁扮粍宸ュ叿绫�
+ * 
  * @author thunder
  *
  */
-public class IntArrUtils {
-	/**
-	 * 此参数返回数组的最大值
-	 */
+public class IntArrUtils extends Base {
 	public static final int MAX_VALUE = 1;
-	/**
-	 * 此参数返回数组的最小值
-	 */
+
 	public static final int MIN_VALUE = 0;
 
 	/**
-	 * 获取整形数组中的最大值or最小值
+	 * 鑾峰彇鏁村舰鏁扮粍涓殑鏈�澶у�紀r鏈�灏忓��
 	 * 
 	 * @param intArr
-	 *            目标数组
+	 *            鐩爣鏁扮粍
 	 * @param valueType
-	 *            值类型：最大值：{@link #MAX_VALUE} 最小值：{@link #MIN_VALUE}
+	 *            鍊肩被鍨嬶細鏈�澶у�硷細{@link #MAX_VALUE} 鏈�灏忓�硷細{@link #MIN_VALUE}
 	 * 
 	 * @see {@link #MAX_VALUE}
 	 * @see {@link #MIN_VALUE}
@@ -41,19 +37,19 @@ public class IntArrUtils {
 	}
 
 	/**
-	 * 对目标数组排序
+	 * 瀵圭洰鏍囨暟缁勬帓搴�
 	 * 
 	 * @param intArr
-	 *            目标数组
+	 *            鐩爣鏁扮粍
 	 * @param arrLen
-	 *            数组长度
-	 * @return 排序后的数组
+	 *            鏁扮粍闀垮害
+	 * @return 鎺掑簭鍚庣殑鏁扮粍
 	 */
 	private static int[] getSort(int[] intArr, int arrLen) {
 		for (int i = 0; i < arrLen - 1; i++) {
 			for (int j = 0; j < arrLen - 1 - i; j++) {
 				if (intArr[j] > intArr[j + 1]) {
-					/** 交换学生位置 */
+					/** 浜ゆ崲瀛︾敓浣嶇疆 */
 					int temp1 = 0;
 					temp1 = intArr[j];
 					intArr[j] = intArr[j + 1];

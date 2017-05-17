@@ -5,11 +5,12 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
+import com.tianjj.tutils.base.Base;
 import com.tianjj.tutils.base.PinyinUtil;
 
 import android.R.array;
 
-public class QuickIndexHelper {
+public class QuickIndexHelper extends Base{
 
 	/**
 	 * get the ordered {@link List} by first letter of names

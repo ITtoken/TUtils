@@ -1,2 +1,7 @@
 eclipse.preferences.version=1
+encoding//src/com/tianjj/tutils/base/In2Out.java=UTF-8
+encoding//src/com/tianjj/tutils/base/IntArrUtils.java=UTF-8
+encoding//src/com/tianjj/tutils/base/JsonUtil.java=UTF-8
+encoding//src/com/tianjj/tutils/base/MD5.java=UTF-8
 encoding//src/com/tianjj/tutils/widgets/FileBrowser.java=UTF-8
+encoding//src/com/tianjj/tutils/widgets/SlideMenu.java=UTF-8

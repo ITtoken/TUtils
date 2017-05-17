@@ -4,13 +4,13 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class In2Out {
+public class In2Out extends Base{
 	/**
-	 * 输入输出流的对接
+	 * 杈撳叆杈撳嚭娴佺殑瀵规帴
 	 * 
 	 * @param in
-	 *            输入流对象
-	 * @return 流中的字符串内容
+	 *            杈撳叆娴佸璞�
+	 * @return 娴佷腑鐨勫瓧绗︿覆鍐呭
 	 * @throws IOException
 	 */
 	public static String getInputstreamInfo(InputStream in) throws IOException {
