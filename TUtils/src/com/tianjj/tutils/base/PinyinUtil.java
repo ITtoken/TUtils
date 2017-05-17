@@ -7,15 +7,21 @@ import net.sourceforge.pinyin4j.format.HanyuPinyinToneType;
 import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombination;
 
 public class PinyinUtil extends Base{
-
-	private static PinyinUtil pu = new PinyinUtil();
 	private boolean isStartWithHY;
+
+	private static Singleton<PinyinUtil> pu = new Singleton<PinyinUtil>() {
+		
+		@Override
+		protected PinyinUtil create() {
+			return new PinyinUtil();
+		}
+	};
 
 	private PinyinUtil() {
 	}
 
 	public static PinyinUtil getInstance() {
-		return pu;
+		return pu.get();
 	}
 
 	/**
