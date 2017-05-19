@@ -70,17 +70,13 @@ public class FileBrowser extends ListView {
 	}
 
 	private List<File> getFiles(String path) {
-		File file = new File(path);
-		File[] files = file.listFiles();
-		List<File> list = null;
-		if(files == null){
+		File[] files = new File(path).listFiles();
+		if (files == null) {
 			Log.e(TAG, "Please check if the permission 'android.permission.READ_EXTERNAL_STORAGE'"
 					+ "was used in manifest file!");
-			list = new ArrayList<File>();
-		}else{
-			list = Arrays.asList(files);
+			return new ArrayList<File>();
 		}
-		return list;
+		return Arrays.asList(files);
 	}
 
 	private String getInputstreamInfo(InputStream in) throws IOException {
@@ -251,13 +247,13 @@ public class FileBrowser extends ListView {
 
 	public interface FileOrDirOperateListener {
 		/**
-		 * @param fileName 
-		 * 			  The file's name you chose.
+		 * @param fileName
+		 *            The file's name you chose.
 		 * @param currentPath
-		 * 			  The path of directory where you are.
+		 *            The path of directory where you are.
 		 * @param fileContent
-		 *            It will be null if the file content is null,
-		 *            or will be the content of the file.
+		 *            It will be null if the file content is null, or will be
+		 *            the content of the file.
 		 */
 		public void onChoose(String fileName, String currentPath, String fileContent);
 	}
