@@ -54,10 +54,10 @@ public class QuickIndexView extends View {
 	}
 
 	/**
-	 * 获取每一个字母所在的位置
+	 * Get the letters position.
 	 * 
 	 * @param i
-	 *            第i个字母
+	 *            index of the letter.
 	 */
 	private void getLetterPos(int i) {
 		mTextPosX = mMeasuredWidth / 2 - mTextWidth / 2;
@@ -66,28 +66,18 @@ public class QuickIndexView extends View {
 		mTextPosY = perHeight * i + perLetterPos;
 	}
 
-	/**
-	 * 初始化画笔
-	 * 
-	 * @param i
-	 *            第i个字母的画壁
-	 */
 	private void initPaint(int i) {
-		mPaint = new Paint();
-		mPaint.setAntiAlias(true);
-		mPaint.setColor(Color.WHITE);
-		mPaint.setTextSize(15);
-		mPaint.setTypeface(Typeface.DEFAULT_BOLD);
+		if (mPaint == null) {
+			mPaint = new Paint();
+			mPaint.setAntiAlias(true);
+			mPaint.setColor(Color.WHITE);
+			mPaint.setTextSize(15);
+			mPaint.setTypeface(Typeface.DEFAULT_BOLD);
+		}
 
 		getTextBounds(LETTERS[i]);
 	}
 
-	/**
-	 * 获取文本所在的矩形大小
-	 * 
-	 * @param text
-	 *            对应的文本
-	 */
 	private void getTextBounds(String text) {
 		Rect rect = new Rect();
 		mPaint.getTextBounds(text, 0, text.length(), rect);

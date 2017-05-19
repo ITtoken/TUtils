@@ -89,6 +89,10 @@ public class CircleProgressbar extends View {
 		invalidate();
 	}
 
+	/**
+	 * Set the progress.
+	 * @param progress
+	 */
 	public void setProgress(float progress) {
 		if (progress < 0) {
 			progress = 0;
@@ -99,6 +103,10 @@ public class CircleProgressbar extends View {
 		invalidate();
 	}
 
+	/**
+	 * Set the text size in middle of Circle.
+	 * @param textSize
+	 */
 	public void setTextSize(float textSize) {
 		if (textSize <= 0) {
 			textSize = 20;// default size
@@ -107,6 +115,10 @@ public class CircleProgressbar extends View {
 		refreshUI();
 	}
 
+	/**
+	 * Set the circle's width
+	 * @param circleWidth
+	 */
 	public void setCircleWidth(int circleWidth) {
 		if (circleWidth < 0) {
 			circleWidth = 0;
@@ -115,6 +127,11 @@ public class CircleProgressbar extends View {
 		refreshUI();
 	}
 
+	/**
+	 * Set the color of text and circle.
+	 * @param textColor
+	 * @param circleColor
+	 */
 	public void setColor(int textColor, int circleColor) {
 		mTextColor = textColor == 0 ? Color.DKGRAY : textColor;
 		mCircleColor = circleColor == 0 ? Color.DKGRAY : circleColor;

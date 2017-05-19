@@ -57,14 +57,14 @@ public class QuickIndexListview extends FrameLayout {
 	}
 
 	/**
-	 * {@link QuickListView} 监听器
+	 * {@link QuickListView} Listener
 	 * 
 	 * @author Tianjj
 	 *
 	 */
 	public abstract class QuickListAdapter {
 		/**
-		 * 获取要显示的条目总数
+		 * Get the item count that to show.
 		 * 
 		 * @return
 		 */
@@ -76,7 +76,7 @@ public class QuickIndexListview extends FrameLayout {
 		}
 
 		/**
-		 * 获取要显示的每个条目的View
+		 * Get the item's View.
 		 * 
 		 * @param position
 		 * @param convertView
@@ -110,21 +110,21 @@ public class QuickIndexListview extends FrameLayout {
 
 	}
 	
-	//外部接口------------------------------------------------------
+	//External insterfaces------------------------------------------------------
 	/**
-	 * 设置条目内容，必须在调用，且在setAdapter之前
+	 * Set the item's content. Must called before <b>setAdapter(QuickListAdapter adapter)</b>
 	 * 
 	 * @param mItemTests
 	 */
-	public void setItemText(String[] mItemTests) {
+	public void setItemText(String... mItemTests) {
 		if (mItemTests == null || mItemTests.length == 0) {
-			throw new RuntimeException("数组元素不能为空！");
+			throw new RuntimeException("Param's value must not be NULL!");
 		}
 		mOrderedList = QuickIndexHelper.getOrderedList(mItemTests);
 	}
 	
 	/**
-	 *设置QuickListView的条目内容
+	 *Set the item's content of <b>QuickListView</b>
 	 * @param adapter
 	 */
 	public void setAdapter(QuickListAdapter adapter) {
@@ -136,7 +136,7 @@ public class QuickIndexListview extends FrameLayout {
 				mIndexChar = letter;
 
 				if (mOrderedList == null) {
-					throw new RuntimeException("setItemText(mItemTests2);方法必须调用，且要在setAdapter（）之前调用！");
+					throw new RuntimeException("Method 'setItemText(mItemTests2)' must called and before setAdapter");
 				}
 				int position = QuickIndexHelper.getLetterPosition(letter, mOrderedList);
 				mListView.setSelection(position);

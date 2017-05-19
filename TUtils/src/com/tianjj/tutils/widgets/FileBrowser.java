@@ -74,6 +74,7 @@ public class FileBrowser extends ListView {
 		if (files == null) {
 			Log.e(TAG, "Please check if the permission 'android.permission.READ_EXTERNAL_STORAGE'"
 					+ "was used in manifest file!");
+			//Ensure return is not NULL.
 			return new ArrayList<File>();
 		}
 		return Arrays.asList(files);
