@@ -40,7 +40,7 @@ public class BlockView extends SurfaceView implements Callback, Runnable, OnTouc
 	private List<Point> list = new ArrayList<Point>();
 	private SparseArray<Rect> blocks = new SparseArray<Rect>();
 
-	private boolean gridShow = true;
+	private boolean gridShow = false;
 	private OnTapDownListener mListener;
 
 	private static final int DOWN = 0;
@@ -80,7 +80,6 @@ public class BlockView extends SurfaceView implements Callback, Runnable, OnTouc
 	private void doDraw(SurfaceHolder holder, Context context) {
 		Canvas canvas = null;
 		Paint paint = new Paint();
-		paint.setColor(Color.BLACK);
 		paint.setStyle(Paint.Style.STROKE);
 		paint.setAntiAlias(true);
 
@@ -94,6 +93,13 @@ public class BlockView extends SurfaceView implements Callback, Runnable, OnTouc
 				loopRender(canvas, paint);
 
 				holder.unlockCanvasAndPost(canvas);
+			}
+			
+			try {
+				//Reduce frame
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
 			}
 		}
 
@@ -115,7 +121,9 @@ public class BlockView extends SurfaceView implements Callback, Runnable, OnTouc
 		switch (stat) {
 		case DOWN:
 		case MOVE:
+			System.out.println("mRect: "+ mRect);
 			if (null != mRect) {
+				System.out.println("mRect into");
 				paint.setAlpha(100);
 				canvas.drawRect(mRect, paint);
 			}
@@ -213,11 +221,10 @@ public class BlockView extends SurfaceView implements Callback, Runnable, OnTouc
 			for (int i = 0; i < blocks.size(); i++) {
 				Rect rect = blocks.get(i);
 				if (move_X < rect.right && move_X > rect.left && move_Y < rect.bottom && move_Y > rect.top) {
-					stat = DOWN | MOVE;
+					stat = DOWN;
 					mRect = rect;
 				}
 			}
-			// list.add(new Point(move_X, move_Y));
 			break;
 		case MotionEvent.ACTION_UP:
 			int uX = (int) event.getX();
@@ -227,7 +234,7 @@ public class BlockView extends SurfaceView implements Callback, Runnable, OnTouc
 				if (uX < rect.right && uX > rect.left && uY < rect.bottom && uY > rect.top) {
 					// System.out.println(blocks.keyAt(i));
 					if (mListener != null) {
-						mListener.onMouseDown(blocks.keyAt(i), rect);
+						mListener.onTap(blocks.keyAt(i), rect);
 					}
 					stat = UP;
 					mRect = rect;
@@ -242,7 +249,7 @@ public class BlockView extends SurfaceView implements Callback, Runnable, OnTouc
 	}
 
 	public interface OnTapDownListener {
-		public void onMouseDown(int whitchBlock, Rect rect);
+		public void onTap(int whitchBlock, Rect rect);
 	}
 
 	public void setOnTapDownListener(OnTapDownListener listener) {
@@ -256,5 +263,5 @@ public class BlockView extends SurfaceView implements Callback, Runnable, OnTouc
 	public SparseArray<Rect> getAllBlocksRect() {
 		return blocks;
 	}
-
+	
 }
