@@ -2,6 +2,7 @@ package com.tianjj.tutils.helper;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -53,23 +54,19 @@ public class QuickIndexHelper extends Base{
 	}
 
 	/**
-	 * get the position int the {@link String} {@link List}
+	 * get the letter position in the {@link String} {@link List}
 	 * 
 	 * @param letter
 	 * @param strings
 	 * @return
 	 */
 	public static int getLetterPosition(String letter, List<String> strings) {
-		for (int i = 0; i < strings.size(); i++) {
-			if (letter.equals(strings.get(i))) {
-				return i;
-			}
-		}
-		return -1;
+		String[] strs = (String[])strings.toArray();
+		return getLetterPosition(letter,strs);
 	}
 
 	/**
-	 * get the position int the {@link String} {@link array}
+	 * get the letter position in the type String Array
 	 * 
 	 * @param letter
 	 * @param strings

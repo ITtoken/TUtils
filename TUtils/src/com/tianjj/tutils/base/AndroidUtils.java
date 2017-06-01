@@ -96,7 +96,7 @@ public class AndroidUtils extends Base {
 	}
 
 	/**
-	 * Show Sinle Toast.
+	 * Show Single Toast.
 	 * 
 	 * @param context
 	 * @param resId

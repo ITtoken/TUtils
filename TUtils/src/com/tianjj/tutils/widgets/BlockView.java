@@ -1,15 +1,15 @@
-package com.example.surfaceviewdemo;
+package com.tianjj.tutils.widgets;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
-import android.graphics.PointF;
 import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.util.SparseArray;
@@ -27,7 +27,6 @@ public class BlockView extends SurfaceView implements Callback, Runnable, OnTouc
 	private Thread mThread;
 	public boolean isRunning = false;
 	private SurfaceHolder holder;
-	private PointF position;
 
 	// Blocks
 	private float[] cordinateXs;
@@ -53,6 +52,9 @@ public class BlockView extends SurfaceView implements Callback, Runnable, OnTouc
 	private int xBlocks = 10;
 	private int yBlocks = 10;
 
+	// Bitmaps
+	ArrayList<Bitmap> mBitmaps;
+
 	public BlockView(Context context) {
 		this(context, null);
 	}
@@ -63,13 +65,10 @@ public class BlockView extends SurfaceView implements Callback, Runnable, OnTouc
 	}
 
 	private void init() {
-		position = new PointF(0, 0);
-
 		holder = getHolder();
 		holder.addCallback(this);
 		setOnTouchListener(this);
 		mThread = new Thread(this);
-
 	}
 
 	@Override
@@ -94,9 +93,9 @@ public class BlockView extends SurfaceView implements Callback, Runnable, OnTouc
 
 				holder.unlockCanvasAndPost(canvas);
 			}
-			
+
 			try {
-				//Reduce frame
+				// Reduce frame
 				Thread.sleep(100);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
@@ -106,6 +105,12 @@ public class BlockView extends SurfaceView implements Callback, Runnable, OnTouc
 	}
 
 	private void loopRender(Canvas canvas, Paint paint) {
+		drawGrid(canvas, paint);
+		drawBitmap(canvas, paint);
+		drawTouchsShow(canvas, paint);
+	}
+
+	private void drawGrid(Canvas canvas, Paint paint) {
 		if (gridShow) {
 			// 绘制网格辅助线（临时，最后要去掉）---start---
 			for (int i = 0; i < cordinateXs.length; i++) {
@@ -117,11 +122,24 @@ public class BlockView extends SurfaceView implements Callback, Runnable, OnTouc
 			}
 			// 绘制网格辅助线（临时，最后要去掉）---end---
 		}
+	}
 
+	private void drawBitmap(Canvas canvas, Paint paint) {
+		if (mBitmaps != null && mBitmaps.size() > 0) {
+			int index = Math.min(mBitmaps.size(), blocks.size());
+			for (int i = 0; i < index; i++) {
+				Bitmap bitmap = mBitmaps.get(i);
+				Rect rect = blocks.get(i);
+				canvas.drawBitmap(bitmap, rect, rect, paint);
+			}
+		}
+	}
+
+	private void drawTouchsShow(Canvas canvas, Paint paint) {
 		switch (stat) {
 		case DOWN:
 		case MOVE:
-			System.out.println("mRect: "+ mRect);
+			System.out.println("mRect: " + mRect);
 			if (null != mRect) {
 				System.out.println("mRect into");
 				paint.setAlpha(100);
@@ -187,8 +205,10 @@ public class BlockView extends SurfaceView implements Callback, Runnable, OnTouc
 
 	@Override
 	public void surfaceCreated(SurfaceHolder holder) {
-		isRunning = true;
-		mThread.start();
+		if (!isRunning) {
+			isRunning = true;
+			mThread.start();
+		}
 	}
 
 	@Override
@@ -202,8 +222,10 @@ public class BlockView extends SurfaceView implements Callback, Runnable, OnTouc
 	@Override
 	public void surfaceDestroyed(SurfaceHolder holder) {
 		try {
-			isRunning = false;
-			mThread.join();
+			if (isRunning) {
+				isRunning = false;
+				mThread.join();
+			}
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -263,5 +285,9 @@ public class BlockView extends SurfaceView implements Callback, Runnable, OnTouc
 	public SparseArray<Rect> getAllBlocksRect() {
 		return blocks;
 	}
-	
+
+	public void loadImage(ArrayList<Bitmap> bmps) {
+		mBitmaps = bmps;
+	}
+
 }
